@@ -23,3 +23,12 @@ void OP_2nnn()
     *(chip8_memory.stack + chip8_memory.stack_pointer++) = chip8_memory.program_counter;
     chip8_memory.program_counter = opcode & 0x0FFFu;
 }
+
+void OP_3xkk()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+    uint8_t register_value = *(chip8_memory.registers + register_address);
+
+    if (register_value == (opcode & 0x00FFu))
+        chip8_memory.program_counter += 2;
+}
