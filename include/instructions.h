@@ -44,7 +44,7 @@ void OP_1nnn();
  *
  * This instruction pushes the current program counter onto
  * the stack so execution can return after the subroutine
- * completes. Because Cycle() has already advanced the PC by 2,
+ * completes. Because processor_cycle() has already advanced the PC by 2,
  * the stored return address correctly points to the instruction
  * following this CALL. Returning to the CALL itself would cause
  * an infinite loop of CALLs and RETs, so preserving the
@@ -58,7 +58,7 @@ void OP_2nnn();
  * Skips the next instruction if Vx equals kk.
  *
  * Because the program counter has already been incremented
- * by 2 in Cycle(), skipping an instruction simply requires
+ * by 2 in processor_cycle(), skipping an instruction simply requires
  * incrementing the PC by an additional 2. This moves execution
  * past the next instruction when the equality condition is met.
  */
@@ -70,7 +70,7 @@ void OP_3xkk();
  * Skips the next instruction if Vx does not equal kk.
  *
  * Since the program counter has already been incremented by 2
- * in Cycle(), skipping the next instruction is achieved by
+ * in processor_cycle(), skipping the next instruction is achieved by
  * incrementing the PC by an additional 2. This advances execution
  * past the following instruction when the inequality condition holds.
  */
@@ -82,7 +82,7 @@ void OP_4xkk();
  * Skips the next instruction if Vx equals Vy.
  *
  * Because the program counter has already been incremented by 2
- * in Cycle(), skipping the next instruction is done by incrementing
+ * in processor_cycle(), skipping the next instruction is done by incrementing
  * the PC by an additional 2. Execution advances past the next
  * instruction whenever the equality condition is satisfied.
  */
@@ -219,7 +219,7 @@ void OP_8xyE();
  * Skips the next instruction if Vx does not equal Vy.
  *
  * Since the program counter has already been incremented by 2
- * in Cycle(), skipping the following instruction is done by
+ * in processor_cycle(), skipping the following instruction is done by
  * incrementing the PC by an additional 2 when Vx and Vy differ.
  * Execution continues past the next instruction only if the
  * inequality condition is met.
@@ -286,7 +286,7 @@ void OP_Dxyn();
  * in register Vx is currently pressed.
  *
  * Because the program counter has already been incremented by 2
- * in Cycle(), skipping the next instruction is done by adding an
+ * in processor_cycle(), skipping the next instruction is done by adding an
  * additional 2 to the PC when the key is detected as pressed.
  * This allows conditional flow control based on user input.
  */
@@ -299,7 +299,7 @@ void OP_Ex9E();
  * in register Vx is *not* currently pressed.
  *
  * Since the program counter has already been incremented by 2 in
- * Cycle(), skipping the next instruction is accomplished by adding
+ * processor_cycle(), skipping the next instruction is accomplished by adding
  * an additional 2 to the PC when the key is not pressed. This enables
  * conditional branching based on the absence of user input.
  */

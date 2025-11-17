@@ -15,5 +15,11 @@ void OP_00EE()
 
 void OP_1nnn()
 {
-    chip8_memory.program_counter = ot_opcode & 0x0FFFu;
+    chip8_memory.program_counter = opcode & 0x0FFFu;
+}
+
+void OP_2nnn()
+{
+    *(chip8_memory.stack + chip8_memory.stack_pointer++) = chip8_memory.program_counter;
+    chip8_memory.program_counter = opcode & 0x0FFFu;
 }

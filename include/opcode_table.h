@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 // Global current opcode
-extern uint16_t ot_opcode;
+extern uint16_t opcode;
 
 // Initialize all dispatch tables
 void ot_init(void);
