@@ -53,3 +53,10 @@ void OP_5xy0()
     if (register_value_x == register_value_y)
         chip8_memory.program_counter += 2;
 }
+
+void OP_6xkk()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+    uint8_t value = opcode & 0x00FFu;
+    *(chip8_memory.registers + register_address) = value;
+}
