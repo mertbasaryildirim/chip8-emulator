@@ -2,6 +2,7 @@
 #define MEMORY_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #define FONTSET_SIZE 80
 #define FONTSET_START_ADDRESS 0x50
@@ -18,7 +19,7 @@ typedef struct
     uint8_t delay_timer;
     uint8_t sound_timer;
     uint8_t keypad[16];
-    uint32_t video[64][32];
+    bool display[64][32];
     uint16_t opcode;
 } MEMORY;
 
