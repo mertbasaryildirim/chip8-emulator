@@ -1,5 +1,6 @@
 #include "instructions.h"
 #include "chip8.h"
+#include "opcode_table.h"
 
 void OP_00E0()
 {
@@ -10,4 +11,9 @@ void OP_00EE()
 {
     --chip8_memory.stack_pointer;
     chip8_memory.program_counter = *(chip8_memory.stack + chip8_memory.stack_pointer);
+}
+
+void OP_1nnn()
+{
+    chip8_memory.program_counter = ot_opcode & 0x0FFFu;
 }
