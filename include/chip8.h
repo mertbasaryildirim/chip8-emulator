@@ -10,4 +10,6 @@ void chip8_init();
 
 uint8_t chip8_generate_random_number();
 
+int load_ROM(const char *filename);
+
 #endif

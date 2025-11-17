@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <stdint.h>
@@ -48,4 +49,64 @@ void chip8_init()
 uint8_t chip8_generate_random_number()
 {
     return rand() % 256;
+}
+
+int chip8_load_ROM(const char *filename)
+{
+    FILE *fp = fopen(filename, "rb");
+    if (fp == NULL)
+    {
+        perror("Failed to open ROM file");
+        return -1;
+    }
+
+    // Determine file size
+    if (fseek(fp, 0, SEEK_END) != 0)
+    {
+        perror("fseek (SEEK_END) failed");
+        fclose(fp);
+        return -1;
+    }
+
+    long size = ftell(fp);
+    if (size < 0)
+    {
+        perror("ftell failed");
+        fclose(fp);
+        return -1;
+    }
+
+    // Check if the ROM fits into CHIP-8 memory
+    if (size > (4096 - START_ADDRESS))
+    {
+        fprintf(stderr,
+                "ERROR: ROM size (%ld bytes) is too large. "
+                "It cannot fit into CHIP-8 memory.\n",
+                size);
+        fclose(fp);
+        return -1;
+    }
+
+    rewind(fp);
+
+    // Read ROM into memory
+    size_t bytes_read = fread(
+        chip8_memory.ram + START_ADDRESS,
+        1,
+        size,
+        fp);
+
+    if (bytes_read != size)
+    {
+        if (ferror(fp))
+            perror("Error while reading ROM file");
+        else
+            fprintf(stderr, "Unexpected: fread read fewer bytes than expected.\n");
+
+        fclose(fp);
+        return -1;
+    }
+
+    fclose(fp);
+    return 0;
 }
