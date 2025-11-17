@@ -41,3 +41,15 @@ void OP_4xkk()
     if (register_value != (opcode & 0x00FFu))
         chip8_memory.program_counter += 2;
 }
+
+void OP_5xy0()
+{
+    uint8_t register_address_x = (opcode & 0x0F00u) >> 8u;
+    uint8_t register_value_x = *(chip8_memory.registers + register_address_x);
+
+    uint8_t register_address_y = (opcode & 0x00F0u) >> 4u;
+    uint8_t register_value_y = *(chip8_memory.registers + register_address_y);
+
+    if (register_value_x == register_value_y)
+        chip8_memory.program_counter += 2;
+}
