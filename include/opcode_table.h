@@ -4,12 +4,12 @@
 #include <stdint.h>
 
 // Global current opcode
-extern uint16_t chip8_opcode;
+extern uint16_t ot_opcode;
 
 // Initialize all dispatch tables
-void chip8_init_opcode_table(void);
+void ot_init(void);
 
 // Execute current opcode using dispatch table
-void chip8_execute_opcode(void);
+void ot_execute(void);
 
 #endif

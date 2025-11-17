@@ -1,18 +1,22 @@
-#include <stdint.h>
 #include "chip8.h"
+#include "opcode_table.h"
 
-void processor_cycle()
+void processor_cycle(void)
 {
-    // Fetch
-    uint16_t opcode = *(chip8_memory.ram + chip8_memory.program_counter) |
-                      *(chip8_memory.ram + chip8_memory.program_counter + 1);
+    /* Fetch opcode (big-endian) */
+    ot_opcode = (chip8_memory.ram[chip8_memory.program_counter] << 8) |
+                (chip8_memory.ram[chip8_memory.program_counter + 1]);
 
-    // Update the program counter before execution
+    /* Advance program counter */
     chip8_memory.program_counter += 2;
 
-    // Decode and Execute
+    /* Decode + Execute */
+    ot_execute();
 
-    // Update the timers if necessary
-    chip8_memory.delay_timer -= (chip8_memory.delay_timer > 0) ? 1 : 0;
-    chip8_memory.sound_timer -= (chip8_memory.sound_timer > 0) ? 1 : 0;
+    /* Timers */
+    if (chip8_memory.delay_timer > 0)
+        chip8_memory.delay_timer--;
+
+    if (chip8_memory.sound_timer > 0)
+        chip8_memory.sound_timer--;
 }
