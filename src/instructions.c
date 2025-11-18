@@ -68,3 +68,11 @@ void OP_7xkk()
 
     chip8_memory.registers[register_address] += value;
 }
+
+void OP_8xy0()
+{
+    uint8_t register_address_x = (opcode & 0x0F00u) >> 8u;
+    uint8_t register_address_y = (opcode & 0x00F0u) >> 4u;
+
+    chip8_memory.registers[register_address_x] = chip8_memory.registers[register_address_y];
+}
