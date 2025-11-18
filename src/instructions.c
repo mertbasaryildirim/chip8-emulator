@@ -156,3 +156,8 @@ void OP_9xy0()
     chip8_memory.program_counter +=
         (chip8_memory.registers[register_address_x] != chip8_memory.registers[register_address_y]) ? 2 : 0;
 }
+
+void OP_Annn()
+{
+    chip8_memory.index = opcode & 0x0FFFu;
+}
