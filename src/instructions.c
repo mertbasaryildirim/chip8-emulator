@@ -161,3 +161,8 @@ void OP_Annn()
 {
     chip8_memory.index = opcode & 0x0FFFu;
 }
+
+void OP_Bnnn()
+{
+    chip8_memory.program_counter = chip8_memory.registers[0x0] + (opcode & 0x0FFFu);
+}
