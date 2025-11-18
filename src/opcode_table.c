@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-uint16_t ot_opcode = 0;
+uint16_t opcode = 0;
 
 typedef void (*OpcodeFunc)(void);
 
@@ -92,35 +92,35 @@ void ot_init(void)
 void ot_execute(void)
 {
     /* Dispatch by high nibble */
-    uint8_t index = (uint8_t)((ot_opcode & 0xF000u) >> 12);
+    uint8_t index = (uint8_t)((opcode & 0xF000u) >> 12);
     OpcodeFunc func = mainTable[index];
     func();
 }
 
 static void Table0(void)
 {
-    uint8_t index = (uint8_t)(ot_opcode & 0x000Fu);
+    uint8_t index = (uint8_t)(opcode & 0x000Fu);
     OpcodeFunc func = table0[index];
     func();
 }
 
 static void Table8(void)
 {
-    uint8_t index = (uint8_t)(ot_opcode & 0x000Fu);
+    uint8_t index = (uint8_t)(opcode & 0x000Fu);
     OpcodeFunc func = table8[index];
     func();
 }
 
 static void TableE(void)
 {
-    uint8_t index = (uint8_t)(ot_opcode & 0x000Fu);
+    uint8_t index = (uint8_t)(opcode & 0x000Fu);
     OpcodeFunc func = tableE[index];
     func();
 }
 
 static void TableF(void)
 {
-    uint8_t index = (uint8_t)(ot_opcode & 0x00FFu);
+    uint8_t index = (uint8_t)(opcode & 0x00FFu);
     OpcodeFunc func = tableF[index];
     func();
 }
@@ -128,5 +128,5 @@ static void TableF(void)
 static void OP_NULL(void)
 {
     /* Unhandled opcode */
-    fprintf(stderr, "Unhandled opcode: 0x%04X\n", ot_opcode);
+    fprintf(stderr, "Unhandled opcode: 0x%04X\n", opcode);
 }

@@ -4,8 +4,8 @@
 void processor_cycle(void)
 {
     /* Fetch opcode (big-endian) */
-    ot_opcode = (chip8_memory.ram[chip8_memory.program_counter] << 8) |
-                (chip8_memory.ram[chip8_memory.program_counter + 1]);
+    opcode = (chip8_memory.ram[chip8_memory.program_counter] << 8) |
+             (chip8_memory.ram[chip8_memory.program_counter + 1]);
 
     /* Advance program counter */
     chip8_memory.program_counter += 2;
