@@ -120,3 +120,11 @@ void OP_8xy5()
         (chip8_memory.registers[register_address_x] > chip8_memory.registers[register_address_y]) ? 1 : 0;
     chip8_memory.registers[register_address_x] -= chip8_memory.registers[register_address_y];
 }
+
+void OP_8xy6()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+
+    chip8_memory.registers[0xF] = chip8_memory.registers[register_address] & 0x0001u;
+    chip8_memory.registers[register_address] >>= 1;
+}
