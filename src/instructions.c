@@ -166,3 +166,10 @@ void OP_Bnnn()
 {
     chip8_memory.program_counter = chip8_memory.registers[0x0] + (opcode & 0x0FFFu);
 }
+
+void OP_Cxkk()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+
+    chip8_memory.registers[register_address] = chip8_generate_random_number() & (opcode & 0x00FFu);
+}
