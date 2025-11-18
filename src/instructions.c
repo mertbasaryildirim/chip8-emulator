@@ -100,3 +100,13 @@ void OP_8xy3()
 
     chip8_memory.registers[register_address_x] ^= chip8_memory.registers[register_address_y];
 }
+
+void OP_8xy4()
+{
+    uint8_t register_address_x = (opcode & 0x0F00u) >> 8u;
+    uint8_t register_address_y = (opcode & 0x00F0u) >> 4u;
+    uint16_t sum = chip8_memory.registers[register_address_x] + chip8_memory.registers[register_address_y];
+
+    chip8_memory.registers[0xF] = (sum > 0xFFu) ? 1 : 0;
+    chip8_memory.registers[register_address_x] = (uint8_t)sum;
+}
