@@ -230,3 +230,19 @@ void OP_Fx07()
 
     chip8_memory.registers[register_address] = chip8_memory.delay_timer;
 }
+
+void OP_Fx0A()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+
+    for (uint8_t i = 0; i < 16; i++)
+    {
+        if (chip8_memory.keypad[i])
+        {
+            chip8_memory.registers[register_address] = i;
+            return;
+        }
+    }
+
+    chip8_memory.program_counter -= 2;
+}
