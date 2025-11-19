@@ -55,9 +55,7 @@ void DisplayManager_Update()
     {
         for (int x = 0; x < CHIP8_WIDTH; x++)
         {
-            pixels[y][x] = chip8_memory.display[y][x]
-                               ? 0xFFFFFFFF
-                               : 0xFF000000;
+            pixels[y][x] = chip8_memory.display[y][x];
         }
     }
 
