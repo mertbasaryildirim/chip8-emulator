@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    if (chip8_load_rom(argv[1]) == 1)
+    if (chip8_load_ROM(argv[1]) == 1)
     {
         printf("Failed to load ROM!\n");
         return 1;
