@@ -125,7 +125,7 @@ void OP_8xy6()
 {
     uint8_t register_address = (opcode & 0x0F00u) >> 8u;
 
-    chip8_memory.registers[0xF] = chip8_memory.registers[register_address] & 0x0001u;
+    chip8_memory.registers[0xF] = chip8_memory.registers[register_address] & 0x1u;
     chip8_memory.registers[register_address] >>= 1;
 }
 
@@ -154,7 +154,7 @@ void OP_9xy0()
     uint8_t register_address_y = (opcode & 0x00F0u) >> 4u;
 
     chip8_memory.program_counter +=
-        (chip8_memory.registers[register_address_x] != chip8_memory.registers[register_address_y]) ? 2 : 0;
+        ((chip8_memory.registers[register_address_x] != chip8_memory.registers[register_address_y]) ? 2 : 0);
 }
 
 void OP_Annn()
