@@ -200,12 +200,16 @@ void OP_Dxyn()
                 uint8_t row = (register_value_y + i) % 32;
                 uint8_t col = (register_value_x + j) % 64;
 
-                bool old_pixel = chip8_memory.display[row][col];
+                uint32_t old_pixel = chip8_memory.display[row][col];
+                bool previously_set = old_pixel != 0;
 
-                if (old_pixel)
+                if (previously_set)
                     chip8_memory.registers[0xF] = 1;
 
-                chip8_memory.display[row][col] = old_pixel ^ new_pixel;
+                bool result = previously_set ^ new_pixel;
+
+                chip8_memory.display[row][col] =
+                    result ? 0xFFFFFFFF : 0x00000000;
             }
         }
     }
