@@ -207,3 +207,11 @@ void OP_Dxyn()
         }
     }
 }
+
+void OP_Ex9E()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+    uint8_t register_value = chip8_memory.registers[register_address];
+
+    chip8_memory.program_counter += (chip8_memory.keypad[register_value]) ? 2 : 0;
+}
