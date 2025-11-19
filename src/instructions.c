@@ -1,6 +1,7 @@
 #include "instructions.h"
 #include "chip8.h"
 #include "opcode_table.h"
+#include "memory.h"
 
 void OP_00E0()
 {
@@ -266,4 +267,12 @@ void OP_Fx1E()
     uint8_t register_address = (opcode & 0x0F00u) >> 8u;
 
     chip8_memory.index += chip8_memory.registers[register_address];
+}
+
+void OP_Fx29()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+    uint8_t register_value = chip8_memory.registers[register_address];
+
+    chip8_memory.index = FONTSET_START_ADDRESS + (5 * register_value);
 }
