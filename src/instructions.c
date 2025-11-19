@@ -289,3 +289,13 @@ void OP_Fx33()
     register_value /= 10;
     chip8_memory.ram[chip8_memory.index] = register_value;
 }
+
+void OP_Fx55()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+
+    for (uint8_t i = 0; i <= register_address; i++)
+    {
+        chip8_memory.ram[chip8_memory.index + i] = chip8_memory.registers[i];
+    }
+}
