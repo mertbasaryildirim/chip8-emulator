@@ -19,7 +19,7 @@ typedef struct
     uint8_t delay_timer;
     uint8_t sound_timer;
     uint8_t keypad[16];
-    bool display[64][32];
+    bool display[32][64];
     uint16_t opcode;
 } MEMORY;
 
