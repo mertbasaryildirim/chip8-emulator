@@ -3,6 +3,7 @@
 #include "opcode_table.h"
 #include "memory.h"
 #include <math.h>
+#include <string.h>
 
 void OP_00E0()
 {
