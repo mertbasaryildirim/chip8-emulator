@@ -2,6 +2,7 @@
 #include "chip8.h"
 #include "opcode_table.h"
 #include "memory.h"
+#include <math.h>
 
 void OP_00E0()
 {
@@ -275,4 +276,16 @@ void OP_Fx29()
     uint8_t register_value = chip8_memory.registers[register_address];
 
     chip8_memory.index = FONTSET_START_ADDRESS + (5 * register_value);
+}
+
+void OP_Fx33()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+    uint8_t register_value = chip8_memory.registers[register_address];
+
+    chip8_memory.ram[chip8_memory.index + 2] = register_value % 10;
+    register_value /= 10;
+    chip8_memory.ram[chip8_memory.index + 1] = register_value % 10;
+    register_value /= 10;
+    chip8_memory.ram[chip8_memory.index] = register_value;
 }
