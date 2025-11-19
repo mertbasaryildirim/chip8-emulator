@@ -253,3 +253,10 @@ void OP_Fx15()
 
     chip8_memory.delay_timer = chip8_memory.registers[register_address];
 }
+
+void OP_Fx18()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+
+    chip8_memory.sound_timer = chip8_memory.registers[register_address];
+}
