@@ -173,3 +173,37 @@ void OP_Cxkk()
 
     chip8_memory.registers[register_address] = chip8_generate_random_number() & (opcode & 0x00FFu);
 }
+
+void OP_Dxyn()
+{
+    uint8_t register_address_x = (opcode & 0x0F00u) >> 8u;
+    uint8_t register_address_y = (opcode & 0x00F0u) >> 4u;
+    uint8_t sprite_size = opcode & 0xFu;
+    uint8_t register_value_x = chip8_memory.registers[register_address_x];
+    uint8_t register_value_y = chip8_memory.registers[register_address_y];
+
+    chip8_memory.registers[0xF] = 0;
+
+    for (uint8_t i = 0; i < sprite_size; i++)
+    {
+        uint8_t sprite_byte = chip8_memory.ram[chip8_memory.index + i];
+
+        for (uint8_t j = 0; j < 8; j++)
+        {
+            bool new_pixel = (sprite_byte & (0x80u >> j)) != 0;
+
+            if (new_pixel)
+            {
+                uint8_t row = (register_value_y + i) % 32;
+                uint8_t col = (register_value_x + j) % 64;
+
+                bool old_pixel = chip8_memory.display[row][col];
+
+                if (old_pixel)
+                    chip8_memory.registers[0xF] = 1;
+
+                chip8_memory.display[row][col] = old_pixel ^ new_pixel;
+            }
+        }
+    }
+}
