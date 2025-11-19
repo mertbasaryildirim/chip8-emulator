@@ -246,3 +246,10 @@ void OP_Fx0A()
 
     chip8_memory.program_counter -= 2;
 }
+
+void OP_Fx15()
+{
+    uint8_t register_address = (opcode & 0x0F00u) >> 8u;
+
+    chip8_memory.delay_timer = chip8_memory.registers[register_address];
+}
