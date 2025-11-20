@@ -27,6 +27,23 @@ Whether you want to load classic CHIP-8 ROMs, study virtual machine execution, o
 
 ---
 
+## ⌨️ Keyboard Mapping
+
+CHIP-8 uses a 16-key hexadecimal keypad.  
+This emulator maps those keys to a modern keyboard as follows:
+
+```
+Keypad       Keyboard
+|1|2|3|C| => |1|2|3|4|
+|4|5|6|D| => |Q|W|E|R|
+|7|8|9|E| => |A|S|D|F|
+|A|0|B|F| => |Z|X|C|V|
+```
+
+This layout preserves the original 4×4 CHIP-8 keypad structure while providing a more comfortable input experience on a standard **QWERTY keyboard**.
+
+---
+
 ## ▶️ How to Run
 
 Running the CHIP-8 emulator is straightforward and requires only a ROM file and the executable.  
@@ -51,23 +68,34 @@ Copy the CHIP-8 ROM file you want to run into the same directory where `chip8.ex
 Execute the emulator with your ROM file as an argument:
 
 ```bash
-/chip8.exe <ROM_FILE>
+chip8.exe <ROM_FILE>
 ```
 
 For example:
 
 ```bash
-/chip8.exe TETRIS.bin
+chip8.exe TETRIS.bin
 ```
+
+---
+
+## 📚 References
+
+The resources below were used as part of the research and development process for this emulator.  
+They may also serve as valuable starting points for anyone learning about CHIP-8 or exploring emulator design concepts:
+
+- https://austinmorlan.com/posts/chip8_emulator/
+- https://multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/
+- https://github.com/eshyong/Chip-8-Emulator
 
 ---
 
 ## 🎥 Demo
 
+Here’s a short demo of the emulator running **Pong**, one of the most popular and classic games developed for CHIP-8. The video shows the emulator’s display output and how the game plays in real time.
+
 <div align="center">
-  <video src="demo.mp4" controls style="max-width: 100%; border-radius: 12px;">
+  <video src="https://github.com/user-attachments/assets/37b04c4d-4d26-4236-8dc4-be529e96569f" controls style="max-width: 50%; border-radius: 12px;">
     Your browser does not support the video tag.
   </video>
 </div>
-
-The video below demonstrates the emulator running a sample CHIP-8 game, showcasing the rendered graphics and overall runtime behavior.
