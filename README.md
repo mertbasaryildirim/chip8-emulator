@@ -2,6 +2,12 @@
   <img src="assets/chip8-cover.png" alt="chip8-emulator-cover">
 </div>
 
+![CHIP-8](https://img.shields.io/badge/CHIP--8-emulator-blueviolet)
+![Opcodes](https://img.shields.io/badge/opcodes-100%25%20implemented-brightgreen)
+![Graphics](https://img.shields.io/badge/graphics-64x32%20monochrome-lightgrey)
+![Architecture](https://img.shields.io/badge/architecture-minimalist-yellow)
+![Code Style](https://img.shields.io/badge/code%20style-clean-success)
+
 # CHIP-8 Emulator
 
 > A minimal, fast, and fully-implemented CHIP-8 emulator written in C — built with clean architecture, readable instruction decoding, and accurate behavior inspired by modern CHIP-8 specifications.
