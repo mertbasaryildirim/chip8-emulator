@@ -1,3 +1,22 @@
+/*
+ * CHIP-8 Instruction Set Interface
+ *
+ * This header declares the complete set of instruction handler functions
+ * used by the CHIP-8 virtual machine. Each function corresponds to a specific
+ * CHIP-8 opcode pattern and implements the required CPU, memory, timer,
+ * display, or keypad behavior.
+ *
+ * These handlers do not fetch or decode instructions themselves; instead,
+ * they are invoked by the opcode dispatch system (see opcode_table.h), which
+ * selects the appropriate function based on the currently fetched opcode.
+ *
+ * All instruction handlers act directly on the global chip8_memory instance,
+ * modifying registers, memory, stack, timers, and graphics state as required
+ * by the CHIP-8 specification. Control-flow instructions adjust the program
+ * counter, arithmetic instructions update registers and flags, and drawing
+ * instructions modify the framebuffer.
+ */
+
 #ifndef INSTRUCTIONS_H
 #define INSTRUCTIONS_H
 
